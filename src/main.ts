@@ -5,9 +5,10 @@ import { join } from 'path'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  
   app.useStaticAssets(join(__dirname, '../public'))
-  app.setViewEngine('ejs')
   app.setBaseViewsDir(join(__dirname, '../views'))
+  app.setViewEngine('ejs')
 
   await app.listen(80, ()=> {console.log('[+] server started at http://localhost:80')});
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { IfaceQuestion } from './face.interface'
 
 function shuffle(arr: any[]) {
     return arr.sort(() => Math.random() - 0.5)
@@ -6,16 +7,19 @@ function shuffle(arr: any[]) {
 
 @Injectable()
 export class FaceService {
-    getFaces() {
+    getFaces(): IfaceQuestion[] {
         const images = shuffle(['/images/faces/1.jpg', '/images/faces/2.jpg', '/images/faces/3.jpg', '/images/faces/4.jpg', '/images/faces/5.jpg'])
         const names = shuffle(['jordan', 'tom', 'mason', 'sam', 'john'])
-        
-        let cards = []
-        cards = images.reduce((result, image, index) => {
-            result[names[index]] = image
-            return result
-        }, {})
 
-        return cards
+        const questions = []
+        images.forEach((image, index) => {
+            const question = {}
+            question['type'] = "faces"
+            question['name'] = names[index]
+            question['image'] = image
+            questions.push(question)
+            
+        })
+        return questions
     }
 }

@@ -12,9 +12,9 @@
     <h1>Remember Faces Below</h1>
 
     <!-- Rendering Faces -->
-    <% for (const card  in cards ) { %>
-        <img src="<%= cards[card] %>" alt="image">
-        <label for="imgage"><%= card %> </label>
+    <% for (const question  of questions ) { %>
+        <img src="<%= question.image %>" alt="image">
+        <label for="imgage"><%= question.name %> </label>
     <% } %>
 
 <script src="/javascripts/faces.js"></script>
