@@ -8,8 +8,12 @@ function shuffle(arr: any[]) {
 @Injectable()
 export class FaceService {
     getFaces(): IfaceQuestion[] {
-        const images = shuffle(['/images/faces/1.jpg', '/images/faces/2.jpg', '/images/faces/3.jpg', '/images/faces/4.jpg', '/images/faces/5.jpg'])
-        const names = shuffle(['jordan', 'tom', 'mason', 'sam', 'john'])
+        const images = shuffle([
+            '/images/faces/1.jpg', '/images/faces/2.jpg', '/images/faces/3.jpg', '/images/faces/4.jpg', '/images/faces/5.jpg','/images/faces/6.jpg', '/images/faces/7.jpg', '/images/faces/8.jpg', '/images/faces/9.jpg', '/images/faces/10.jpg', '/images/faces/11.jpg',
+        ])
+        const names = shuffle([
+            'jordan', 'tom', 'mason', 'sam', 'john','jordan', 'tom', 'mason', 'sam', 'john', 'abraham'
+        ])
 
         const questions = []
         images.forEach((image, index) => {
