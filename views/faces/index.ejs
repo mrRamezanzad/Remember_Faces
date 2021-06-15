@@ -10,14 +10,14 @@
         <center>
             <p>names will hide in: <span class="timer text-danger">15</span> seconds</p>
         </center>
-    </div>~
+    </div>
     <div class="row justify-content-between">
         <!-- Rendering Faces -->
         <% questions.forEach((question, index) => { %>
             <div class="col-10 col-md-4 col-lg-2 mx-2 ">
                 <div class="card"><img class="img-thumbnail" src="<%= question.image %>" alt="image"></div>
                 <p class="text-center"><%= question.name %></p>
-                <input id="question<%= index+1 %>" class="d-none" type="text">
+                <input id="<%= index %>" class="d-none" type="text" value="<%= question.name %>">
             </div>
         <% }) %>
     </div>

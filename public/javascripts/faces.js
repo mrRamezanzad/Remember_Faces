@@ -16,12 +16,38 @@
     setInterval(() => {
         if (counter <= 0 ) {
             clearInterval()
-            return cards.next('label').text('')
+            cards.next('p').text('')
+            cards.siblings('input').removeClass('d-none')
+            return 
         }
         const decreament = Math.floor(Math.random()*90000)
         counter-=decreament
         timer.text(parseInt(timer.text())+decreament)
     },50);
- 
 
+    setTimeout(()=> {
+
+        const answers = getAnswers()
+        $.ajax({
+            type: "post",
+            url: "/faces",
+            data: answers,
+            success: function (response) {
+                console.log("success====> ", response)
+            },
+            error: (err) => {
+                console.log('error=======> ', err)
+            }
+        });
+        getAnswers()
+
+    },2000 )
+
+
+    function getAnswers () {
+        let answers = {}
+        $('input').each(function (index) {answers[index] = $(this).val()})
+        return answers
+    }
+ 
 })(jQuery)
