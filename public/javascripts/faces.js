@@ -6,9 +6,7 @@ const gameDuration = 1000
 // ============================== controlling time of game
 setTimeout(() => { hideNames(); showAnswerInputs() }, gameDuration)
 
-function hideNames () {
-    cards.siblings('p').text('')
-}
+function hideNames () { cards.siblings('p').text('') }
 
 function showAnswerInputs () { cards.siblings('input').removeClass('d-none') }
 
@@ -29,12 +27,12 @@ setTimeout(()=> {
     });
     getAnswers()
 
-}, gameDuration+1000 )
+}, gameDuration+10000 )
 
 
 function getAnswers () {
     let answers = {}
-    $('input').each(function (index) { answers[index] = $(this).val() })
+    $('input').each(function (index) { answers[index] = $(this).val().trim(' ') })
     return answers
 }
 

@@ -18,10 +18,11 @@ export class FaceController {
 
     @Post()
     checkAnswers(@Req() req: Request, @Res() res: Response) {
-        console.log('==========================================================Session')
-        console.log(req.session)
-        console.log('==========================================================Body')
-        console.log(req.body)
-        res.status(500).send('hello i got ya')
+
+        const correctAnswers = req.session['questions']
+        const userAnswers = req.body
+        const results = this.faceService.checkUserAnswers(userAnswers, correctAnswers)
+
+        return res.status(200).send({results})
     }
 }
