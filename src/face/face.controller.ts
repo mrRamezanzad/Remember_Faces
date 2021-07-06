@@ -22,7 +22,7 @@ export class FaceController {
         const correctAnswers = req.session['questions']
         const userAnswers = req.body
         const results = this.faceService.checkUserAnswers(userAnswers, correctAnswers)
-
-        return res.status(200).send({results})
+ 
+        return res.status(200).send({results, correctAnswers, userAnswers})
     }
 }

@@ -40,8 +40,7 @@ export class FaceService {
             else results.push(false)
 
         }
-
-        console.log({ results })
+        
         return results
     }
 

@@ -14,9 +14,10 @@
     <div class="row justify-content-between">
         <!-- Rendering Faces -->
         <% questions.forEach((question, index) => { %>
-            <div class="col-10 col-md-4 col-lg-2 mx-2 ">
+            <div data-question-id="<%= index %>" class="col-10 col-md-4 col-lg-2 mx-2 ">
                 <div class="card"><img class="img-thumbnail" src="<%= question.image %>" alt="image"></div>
                 <p class="text-center"><%= question.name %></p>
+                <!-- FIXME:  CORRECTLY ALLIG ANSWERS INPUT -->
                 <input id="<%= index %>" class="d-none" type="text" value="">
             </div>
         <% }) %>

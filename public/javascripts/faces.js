@@ -20,15 +20,25 @@ setTimeout(()=> {
         data: answers,
         success: function (response) {
             console.log("success====> ", response)
+
+            showGameResults(response.results)
         },
         error: (err) => {
-            console.log('error=======> ', err)
+            alert('error=======> ', err)
         }
     });
     getAnswers()
 
-}, gameDuration+10000 )
+}, gameDuration)
 
+function showGameResults (results) {
+    let questionIndex = 0
+    let questionsLength = results.length
+    for (; questionIndex < questionsLength; questionIndex++) {
+        if(results[questionIndex]) return $(`[data-question-id=${questionIndex}]`).css('border', '2px solid olivegreen')
+        $(`[data-question-id=${questionIndex}]`).css('border', '2px solid orangered')
+    }
+}
 
 function getAnswers () {
     let answers = {}
