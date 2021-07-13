@@ -8,13 +8,13 @@
     <div class="row">
         <h1>Remember <strong>Faces</strong> Below</h1>
         <center>
-            <p>names will hide in: <span class="timer text-danger">15</span> seconds</p>
+            <p id="timer-alarm">Names will hide in <span class="timer text-danger">-</span> seconds</p>
         </center>
     </div>
     <div class="row justify-content-between">
         <!-- Rendering Faces -->
         <% questions.forEach((question, index) => { %>
-            <div data-question-id="<%= index %>" class="col-10 col-md-4 col-lg-2 m-2 ">
+            <div data-question-id="<%= index %>" class="col-10 col-md-4 col-lg-2 mx-1 my-3 ">
                 <div class="card"><img class="img-thumbnail" src="<%= question.image %>" alt="image"></div>
                 <p class="text-center"><%= question.name %></p>
                 <input id="<%= index %>" class="d-none" style="width: 100%;" type="text" value="">
