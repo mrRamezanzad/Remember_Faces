@@ -1,49 +1,58 @@
 (function($) {
 
 const cards = $('.card')
-const gameDuration = 1000
+const nameTags = cards.siblings('p')
+const answerInputs = cards.siblings('input')
+// const gameStartDelay = 5000 //45000
+const memorizingDuration = 5000 //120000
+const answeringDuration = 5000 //120000
 
-// ============================== controlling time of game
-setTimeout(() => { hideNames(); showAnswerInputs() }, gameDuration)
+// ============================== prepare UI for answering, then check them with server
+setTimeout(() => {
+     toggleNames()
+     toggleAnswerInputs()
+     setTimeout(checkAnswersWithServer, answeringDuration)
+}, memorizingDuration)
 
-function hideNames () { cards.siblings('p').text('') }
+function toggleNames () { nameTags.toggleClass('d-none') }
 
-function showAnswerInputs () { cards.siblings('input').removeClass('d-none') }
+function toggleAnswerInputs () { answerInputs.toggleClass('d-none') }
 
-// ===================================== sending answers to server
-setTimeout(()=> {
-
-    const answers = getAnswers()
-    $.ajax({
-        type: "post",
-        url: "/faces",
-        data: answers,
-        success: function (response) {
-            console.log("success====> ", response)
-
-            showGameResults(response.results)
-        },
-        error: (err) => {
-            alert('error=======> ', err)
-        }
-    });
-    getAnswers()
-
-}, gameDuration)
-
-function showGameResults (results) {
-    let questionIndex = 0
-    let questionsLength = results.length
-    for (; questionIndex < questionsLength; questionIndex++) {
-        if(results[questionIndex]) return $(`[data-question-id=${questionIndex}]`).css('border', '2px solid olivegreen')
-        $(`[data-question-id=${questionIndex}]`).css('border', '2px solid orangered')
-    }
+function checkAnswersWithServer () {
+        const answers = getAnswers()
+        $.ajax({
+            type: "post",
+            url: "/faces",
+            data: answers,
+            success: function (response) {
+                console.log("success====> ", response)
+                showGameResults(response.results)
+            },
+            error: (err) => {
+                alert('error=======> ', err)
+            }
+        });
 }
 
 function getAnswers () {
     let answers = {}
     $('input').each(function (index) { answers[index] = $(this).val().trim(' ') })
     return answers
+}
+
+function showGameResults (results) {
+
+    toggleNames()
+    answerInputs.attr('disabled', "true")
+
+    let answerIndex = 0;
+    let resultsLength = results.length
+    for (; answerIndex < resultsLength; answerIndex++) {
+        if (results[answerIndex])
+            $(answerInputs[answerIndex]).css("border", "1px solid green")
+            
+        else $(answerInputs[answerIndex]).css("border", "1px solid orangered")
+    }
 }
 
 // TODO: ADDING TIMER PREVIEW TO PAGE
